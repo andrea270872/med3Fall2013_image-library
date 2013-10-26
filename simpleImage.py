@@ -99,6 +99,27 @@ class simpleImage(object):
                 clonedImage.setPixelAt(value,row,col)
         return clonedImage
 
+    ### see:
+    ### http://inventwithpython.com/blog/2011/08/11/recursion-explained-with-the-flood-fill-algorithm-and-zombies-and-cats/?wpmp_tp=1
+    # fills all pixels from a give location (row,column)
+    # when the pixel is different from oldGrayLevel, it stops filling
+    def floodFillAt(self,oldGrayLevel,newGrayLevel,row,column):
+        # first check that row and column exist!
+        if row<0 or row>=self.height:
+            return
+        if column<0 or column>=self.width:
+            return
+        
+        currentPixel = self.getPixelAt(row,column)
+        if currentPixel != oldGrayLevel: # the base case
+            return
+        self.setPixelAt(newGrayLevel,row,column)
+        
+        self.floodFillAt(oldGrayLevel,newGrayLevel,row,column+1) # right
+        self.floodFillAt(oldGrayLevel,newGrayLevel,row,column-1) # left
+        self.floodFillAt(oldGrayLevel,newGrayLevel,row+1,column) # down
+        self.floodFillAt(oldGrayLevel,newGrayLevel,row-1,column) # up
+
 
 ## TO DO ==========================================================
     # Implement a thresholding operator.
@@ -124,29 +145,6 @@ class simpleImage(object):
           with fixed radius = 3
         """
         pass
-
-## TO DO ==========================================================
-
-    ### see:
-    ### http://inventwithpython.com/blog/2011/08/11/recursion-explained-with-the-flood-fill-algorithm-and-zombies-and-cats/?wpmp_tp=1
-    # fills all pixels from a give location (row,column)
-    # when the pixel is different from oldGrayLevel, it stops filling
-    def floodFillAt(self,oldGrayLevel,newGrayLevel,row,column):
-        # first check that row and column exist!
-        if row<0 or row>=self.height:
-            return
-        if column<0 or column>=self.width:
-            return
-        
-        currentPixel = self.getPixelAt(row,column)
-        if currentPixel != oldGrayLevel: # the base case
-            return
-        self.setPixelAt(newGrayLevel,row,column)
-        
-        self.floodFillAt(oldGrayLevel,newGrayLevel,row,column+1) # right
-        self.floodFillAt(oldGrayLevel,newGrayLevel,row,column-1) # left
-        self.floodFillAt(oldGrayLevel,newGrayLevel,row+1,column) # down
-        self.floodFillAt(oldGrayLevel,newGrayLevel,row-1,column) # up
 
 # =======================================================
 
