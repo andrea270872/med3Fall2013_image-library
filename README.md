@@ -1,7 +1,7 @@
 med3Fall2013_image-library
 ==========================
 
-This is a work-in-progres, simple class to work wiht grayscale images in python.
+This is a work-in-progress, simple class to work wiht grayscale images in python.
 It is created by the code provided by the semester 3 medialogy students from Esbjerg (DK).
 The images are saved and loaded in PGM, in text format, so that they are simple to edit with a text editor as well as
 to visualized with any image processing application.
