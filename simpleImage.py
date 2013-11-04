@@ -44,6 +44,7 @@ class simpleImage(object):
         f.write("255\n") # how many gray levels
         for rowIndex in range(self.height):
             for colIndex in range(self.width):
+                #print rowIndex,colIndex
                 f.write( ("%03d " % self.getPixelAt(rowIndex,colIndex)) )
             f.write("\n")
         f.close()
@@ -80,6 +81,7 @@ class simpleImage(object):
 
     # this should be a class method,
     # so I can call it to create an image
+    # - Fixed to be more independent from the formatting :)
     @staticmethod
     def readPGM(fileName):
         tempImg = simpleImage(1,1)
@@ -87,10 +89,22 @@ class simpleImage(object):
         tempImg.magicNo = f.readline()
         tempImg.width, tempImg.height = [int(x) for x in f.readline().split()]
         tempImg.maxGrayLevel = f.readline()
-        tempImg._pixels = [[int(x) for x in line.split()] for line in f]
+        
+        values = []
+        for line in f.readlines():
+            values.extend(line.split())
+        #print values
+        
+        count = 0
+        tempImg._pixels = []
+        for j in range(tempImg.height):
+            column = []
+            for i in range(tempImg.width):
+                column.append( int(values[count]) )
+                count += 1
+            tempImg._pixels.append( column )
         return tempImg
-
-
+    
     def clone(self):
         clonedImage = simpleImage(self.width,self.height)
         for row in range(self.height):
@@ -171,7 +185,7 @@ def test1():
     myImage.saveToPGM("test")
     
 def test2():
-    myImage = simpleImage.readPGM("test")
+    myImage = simpleImage.readPGM("test123")
     print myImage
 
     myImage.floodFillAt(0,123,5,5)
