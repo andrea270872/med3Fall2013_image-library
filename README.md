@@ -12,4 +12,5 @@ but with all the code readable and easily to modify (for other students/interest
 Sincerely,
    Andrea Valente
   
-www.create.aau.dk/av
+work page: http://findresearcher.sdu.dk:8080/portal/da/person/anva
+personal home page: http://andval.net/
